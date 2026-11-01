@@ -18,6 +18,9 @@
     --linden-tint: #f7f7f7;
     --linden-band: #f5f5f5;
 
+    /* Header, menu, content and footer width: 1200px, or Bootstrap's 1320px on wide screens */
+    --linden-page-width: 1200px;
+
     --bs-body-font-family: 'Source Sans 3', 'Source Sans Pro', -apple-system, 'Segoe UI', Roboto, sans-serif;
     --bs-body-font-size: 1.0625rem;
     --bs-body-line-height: 1.6;
@@ -60,7 +63,7 @@ body.wt-global {
 
 [dir] .wt-header-container {
     margin-top: 0;
-    max-width: 1200px;
+    max-width: var(--linden-page-width);
 }
 
 /* Top bar: user menu on the left, search on the right */
@@ -132,7 +135,7 @@ body.wt-global {
 
 [dir] .wt-genealogy-menu {
     justify-content: flex-start;
-    max-width: 1200px;
+    max-width: var(--linden-page-width);
     margin: 0 auto;
 }
 
@@ -170,7 +173,7 @@ body.wt-global {
 /* ---------- Content ---------- */
 
 [dir] .wt-main-container {
-    max-width: 1200px;
+    max-width: var(--linden-page-width);
     padding-top: 1.75rem;
     padding-bottom: 2.5rem;
 }
@@ -433,7 +436,7 @@ body.wt-global {
     align-items: center;
     justify-content: space-between;
     gap: 0.25rem 2rem;
-    max-width: 1200px;
+    max-width: var(--linden-page-width);
     margin-top: 2rem;
     padding: 0.9rem 0.75rem;
     color: color-mix(in srgb, var(--linden-on-accent) 60%, var(--linden-accent));
@@ -467,6 +470,12 @@ body.wt-global {
 
 [dir] .wt-footers a:hover {
     color: var(--linden-on-accent);
+}
+
+@media (min-width: 1400px) {
+    :root {
+        --linden-page-width: 1320px;
+    }
 }
 
 /* ---------- Small screens ---------- */
