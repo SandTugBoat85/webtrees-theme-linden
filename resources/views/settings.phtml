@@ -1,0 +1,102 @@
+<?php
+
+declare(strict_types=1);
+
+use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
+use Fisharebest\Webtrees\Http\RequestHandlers\ModulesThemesPage;
+use Fisharebest\Webtrees\I18N;
+
+/**
+ * @var string                                            $accent
+ * @var string                                            $app_description
+ * @var string                                            $app_name
+ * @var string                                            $app_short_name
+ * @var array{url:string,width:int,height:int}|null       $banner
+ * @var string|null                                       $icon
+ * @var string                                            $title
+ */
+
+?>
+
+<?= view('components/breadcrumbs', ['links' => [route(ControlPanel::class) => I18N::translate('Control panel'), route(ModulesThemesPage::class) => I18N::translate('Themes'), $title]]) ?>
+
+<h1><?= $title ?></h1>
+
+<form method="post" enctype="multipart/form-data">
+    <h2 class="h4 mt-4">Look</h2>
+
+    <div class="row mb-3">
+        <label for="accent" class="col-sm-3 col-form-label">Accent colour</label>
+        <div class="col-sm-9">
+            <input type="color" id="accent" name="accent" class="form-control form-control-color" value="<?= e($accent) ?>">
+            <p class="text-muted">The menu bar, footer, buttons and links. Text on it turns white or dark to suit.</p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="banner" class="col-sm-3 col-form-label">Banner</label>
+        <div class="col-sm-9">
+            <?php if ($banner !== null) : ?>
+                <img src="<?= e($banner['url']) ?>" alt="" class="d-block img-fluid mb-2 border" width="<?= $banner['width'] ?>" height="<?= $banner['height'] ?>">
+                <div class="form-check mb-2">
+                    <input type="checkbox" id="remove-banner" name="remove-banner" value="1" class="form-check-input">
+                    <label for="remove-banner" class="form-check-label">Remove the banner and show the site title instead</label>
+                </div>
+            <?php endif ?>
+            <input type="file" id="banner" name="banner" class="form-control" accept="image/jpeg,image/png,image/gif,image/webp">
+            <p class="text-muted">A wide image across the top of every page, for example 1200 × 180 pixels. It replaces the site title, which stays available to screen readers.</p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="icon" class="col-sm-3 col-form-label">Icon</label>
+        <div class="col-sm-9">
+            <?php if ($icon !== null) : ?>
+                <img src="<?= e($icon) ?>" alt="" class="d-block mb-2 border" width="64" height="64">
+                <div class="form-check mb-2">
+                    <input type="checkbox" id="remove-icon" name="remove-icon" value="1" class="form-check-input">
+                    <label for="remove-icon" class="form-check-label">Remove the icon and use webtrees' own</label>
+                </div>
+            <?php endif ?>
+            <input type="file" id="icon" name="icon" class="form-control" accept="image/jpeg,image/png,image/gif,image/webp">
+            <p class="text-muted">The browser tab and home-screen icon. A square PNG of 512 × 512 pixels works best; other shapes are cropped to the middle square.</p>
+        </div>
+    </div>
+
+    <h2 class="h4 mt-4">Home screen</h2>
+    <p class="text-muted">How the site appears when someone adds it to their phone's home screen.</p>
+
+    <div class="row mb-3">
+        <label for="app-name" class="col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-9">
+            <input type="text" id="app-name" name="app-name" class="form-control" value="<?= e($app_name) ?>" placeholder="webtrees" maxlength="100">
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="app-short-name" class="col-sm-3 col-form-label">Short name</label>
+        <div class="col-sm-9">
+            <input type="text" id="app-short-name" name="app-short-name" class="form-control" value="<?= e($app_short_name) ?>" maxlength="30">
+            <p class="text-muted">Shown under the icon. Leave blank to use the name.</p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label for="app-description" class="col-sm-3 col-form-label">Description</label>
+        <div class="col-sm-9">
+            <input type="text" id="app-description" name="app-description" class="form-control" value="<?= e($app_description) ?>" placeholder="webtrees online genealogy" maxlength="200">
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        <?= view('icons/save') ?>
+        <?= I18N::translate('save') ?>
+    </button>
+
+    <a href="<?= route(ModulesThemesPage::class) ?>" class="btn btn-secondary">
+        <?= view('icons/cancel') ?>
+        <?= I18N::translate('cancel') ?>
+    </a>
+
+    <?= csrf_field() ?>
+</form>

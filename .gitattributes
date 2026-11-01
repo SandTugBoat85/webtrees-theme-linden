@@ -1,0 +1,4 @@
+# Left out of release zips (git archive)
+/docs export-ignore
+/.gitattributes export-ignore
+/CHANGELOG.md export-ignore
