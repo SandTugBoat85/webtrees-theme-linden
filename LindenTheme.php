@@ -80,7 +80,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
 
     public function customModuleVersion(): string
     {
-        return '1.0.1';
+        return '1.0.2';
     }
 
     public function customModuleSupportUrl(): string

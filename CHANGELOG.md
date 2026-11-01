@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.0.2 (2026-11-01)
 
 - New setting: show the site title over the banner, for pictures without lettering.
 - New setting: show parents' ages at each birth in chart boxes (off, as before).
