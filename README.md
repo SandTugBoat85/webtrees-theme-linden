@@ -50,7 +50,8 @@ Go to **Control panel > Modules > Themes** and click the preferences icon next t
 
 ![The Linden settings page](docs/settings.png)
 
-- **Accent colour**: the menu bar, footer, buttons and links.
+- **Accent colour**: the menu bar, footer, buttons and links. Pick one of six presets (Linden green,
+  charcoal, navy, burgundy, teal, rust) or any colour you like.
 - **Banner**: any JPEG, PNG, GIF or WebP, ideally about 1200 × 180 pixels. It is scaled to fill
   the width of the page, so keep any lettering in it large: on a phone it shrinks with the image.
   For a picture without lettering, tick **Show the site title over the banner**.

@@ -428,6 +428,25 @@ body.wt-global {
     opacity: 1;
 }
 
+/* ---------- Chart pages: the chart uses the whole window width ----------
+   The header, menu and footer stay at the page width, and so do the chart's options. The
+   interactive tree shares its page class with other module pages, so it is found by its chart. */
+
+[dir] :is(.wt-route-AncestorsChartModule, .wt-route-CompactTreeChartModule, .wt-route-DescendancyChartModule,
+    .wt-route-FamilyBookChartModule, .wt-route-FanChartModule, .wt-route-HourglassChartModule,
+    .wt-route-LifespansChartModule, .wt-route-PedigreeChartModule, .wt-route-PedigreeMapModule,
+    .wt-route-RelationshipsChartModule, .wt-route-TimelineChartModule, .wt-route-webtrees-descendants-chart,
+    .wt-route-webtrees-fan-chart, .wt-route-webtrees-pedigree-chart) .wt-main-container,
+[dir] .wt-route-module-tree .wt-main-container:has(.wt-chart-interactive) {
+    max-width: none;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+[dir] .wt-page-options {
+    max-width: var(--linden-page-width);
+}
+
 /* ---------- Footer: one short full-width accent band, items in columns ---------- */
 
 [dir] .wt-footers {

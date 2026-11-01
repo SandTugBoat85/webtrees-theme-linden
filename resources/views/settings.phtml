@@ -5,6 +5,7 @@ declare(strict_types=1);
 use Fisharebest\Webtrees\Http\RequestHandlers\ControlPanel;
 use Fisharebest\Webtrees\Http\RequestHandlers\ModulesThemesPage;
 use Fisharebest\Webtrees\I18N;
+use Linden\WebtreesTheme\LindenTheme;
 
 /**
  * @var string                                            $accent
@@ -32,8 +33,16 @@ use Fisharebest\Webtrees\I18N;
     <div class="row mb-3">
         <label for="accent" class="col-sm-3 col-form-label">Accent colour</label>
         <div class="col-sm-9">
-            <input type="color" id="accent" name="accent" class="form-control form-control-color" value="<?= e($accent) ?>">
-            <p class="text-muted">The menu bar, footer, buttons and links. Text on it turns white or dark to suit.</p>
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                <input type="color" id="accent" name="accent" class="form-control form-control-color" value="<?= e($accent) ?>">
+                <?php foreach (LindenTheme::PRESETS as $preset_name => $preset) : ?>
+                    <button type="button" class="btn btn-sm btn-outline-secondary d-inline-flex align-items-center gap-1 linden-preset" data-accent="<?= e($preset) ?>">
+                        <span class="d-inline-block border rounded-circle" style="width: 1rem; height: 1rem; background: <?= e($preset) ?>;"></span>
+                        <?= e($preset_name) ?>
+                    </button>
+                <?php endforeach ?>
+            </div>
+            <p class="text-muted">The menu bar, footer, buttons and links. Pick a preset or any colour; text on it turns white or dark to suit.</p>
         </div>
     </div>
 
@@ -142,3 +151,11 @@ use Fisharebest\Webtrees\I18N;
 
     <?= csrf_field() ?>
 </form>
+
+<script>
+    document.querySelectorAll('.linden-preset').forEach(function (button) {
+        button.addEventListener('click', function () {
+            document.getElementById('accent').value = button.dataset.accent;
+        });
+    });
+</script>

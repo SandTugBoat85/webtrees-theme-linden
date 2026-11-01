@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Chart pages use the whole window width; everything else keeps the page width.
+- Six preset accent colours on the settings page, next to the colour picker.
 - "Theme: Linden" in the footer, linking to Linden's home page, with a setting to turn it off.
 
 ## 1.1.0 (2026-11-01)

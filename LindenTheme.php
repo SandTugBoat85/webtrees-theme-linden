@@ -49,6 +49,16 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
 
     public const DEFAULT_ACCENT = '#3f6150';
 
+    // Accent colours offered on the settings page. All give white text at least 4.5:1 contrast.
+    public const PRESETS = [
+        'Linden green' => '#3f6150',
+        'Charcoal'     => '#3a3b3d',
+        'Navy'         => '#2b4162',
+        'Burgundy'     => '#6d2e46',
+        'Teal'         => '#2f6f73',
+        'Rust'         => '#8a4b2a',
+    ];
+
     // Uploaded images are kept in webtrees' data folder, which the web server does not serve
     private const DATA_FOLDER = 'linden-theme/';
 
