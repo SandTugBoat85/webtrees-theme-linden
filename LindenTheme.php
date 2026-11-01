@@ -88,6 +88,15 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
         return 'https://github.com/SandTugBoat85/webtrees-theme-linden';
     }
 
+    /**
+     * webtrees reads the latest version from here once a day, and the control panel says when
+     * there is a newer one. The file on main always names the latest release.
+     */
+    public function customModuleLatestVersionUrl(): string
+    {
+        return 'https://raw.githubusercontent.com/SandTugBoat85/webtrees-theme-linden/main/latest-version.txt';
+    }
+
     public function resourcesFolder(): string
     {
         return __DIR__ . '/resources/';

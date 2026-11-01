@@ -2,3 +2,4 @@
 /docs export-ignore
 /.gitattributes export-ignore
 /CHANGELOG.md export-ignore
+/latest-version.txt export-ignore

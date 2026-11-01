@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- The control panel tells you when a new version of Linden is available.
+
 ## 1.0.2 (2026-11-01)
 
 - New setting: show the site title over the banner, for pictures without lettering.

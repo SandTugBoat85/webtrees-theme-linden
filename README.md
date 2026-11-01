@@ -41,7 +41,8 @@ touching any code: upload a banner and an icon, pick a colour, and you're done.
 4. To make it everyone's theme, go to **Website preferences** and set **Default theme** to Linden.
 
 To upgrade, replace the `linden-theme` folder with the new one. Your settings and images are
-kept.
+kept. webtrees checks for new versions of Linden once a day, and the control panel's front page
+lists it under the custom modules with an upgrade available when there is one.
 
 ## Setting it up
 
