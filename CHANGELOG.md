@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.3.0 (2026-11-01)
 
 - Print styles: pages print in black on white without buttons, tabs, filters or paging; the
   individual page prints in one column, and charts print sideways, scaled to fit.
