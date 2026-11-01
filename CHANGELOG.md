@@ -3,6 +3,7 @@
 ## Unreleased
 
 - New setting: show the site title over the banner, for pictures without lettering.
+- New setting: show parents' ages at each birth in chart boxes (off, as before).
 - New setting: let everyone choose a theme, or keep the theme menu for administrators.
   Everyone gets the menu unless you untick it (1.0 always kept it for administrators).
 

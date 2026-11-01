@@ -120,6 +120,10 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
             $stylesheets[] = $this->assetUrl($this->getPreference('banner-title') === '1' ? 'css/banner-title.css' : 'css/banner.css');
         }
 
+        if ($this->getPreference('chart-ages') !== '1') {
+            $stylesheets[] = $this->assetUrl('css/hide-chart-ages.css');
+        }
+
         return $stylesheets;
     }
 
@@ -239,6 +243,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
             'accent'          => $this->accent(),
             'banner'          => $this->banner(),
             'banner_title'    => $this->getPreference('banner-title') === '1',
+            'chart_ages'      => $this->getPreference('chart-ages') === '1',
             'icon'            => $this->hasIcon() ? $this->iconUrl(192) : null,
             'app_name'        => $this->getPreference('app-name'),
             'app_short_name'  => $this->getPreference('app-short-name'),
@@ -261,6 +266,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
         }
 
         $this->setPreference('banner-title', $params->boolean('banner-title', false) ? '1' : '0');
+        $this->setPreference('chart-ages', $params->boolean('chart-ages', false) ? '1' : '0');
         $this->setPreference('theme-menu', $params->boolean('theme-menu', false) ? '1' : '0');
 
         try {

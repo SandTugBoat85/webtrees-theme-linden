@@ -383,11 +383,6 @@ body.wt-global {
     color: var(--linden-text);
 }
 
-/* Parents' ages at the birth stay on the person page; in a box they are clutter */
-.wt-global .wt-chart-box .age {
-    display: none;
-}
-
 .wt-global .wt-chart-box-fact.small {
     font-size: 0.78rem;
 }

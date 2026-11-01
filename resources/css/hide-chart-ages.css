@@ -1,0 +1,8 @@
+/*
+ * Linden, unless the settings show parents' ages in chart boxes: the ages at a birth stay on
+ * the individual page, leaving the box room for the place.
+ */
+
+.wt-global .wt-chart-box .age {
+    display: none;
+}

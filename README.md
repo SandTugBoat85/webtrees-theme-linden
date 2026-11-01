@@ -57,6 +57,7 @@ Go to **Control panel > Modules > Themes** and click the preferences icon next t
   ![The site title over a banner picture](docs/title-over-banner.png)
 
 - **Icon**: a square image, ideally 512 × 512 pixels. Other shapes are cropped to the middle.
+- **Chart boxes**: tick "Show parents' ages at each birth" to show them in charts too.
 - **Theme menu**: untick "Let everyone choose a theme" to keep the menu for administrators.
 - **Home screen**: the name, short name and description used when someone adds your site to
   their phone's home screen. Left blank, webtrees' own are used.
