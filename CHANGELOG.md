@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- "Theme: Linden" in the footer, linking to Linden's home page, with a setting to turn it off.
+
 ## 1.1.0 (2026-11-01)
 
 - The control panel tells you when a new version of Linden is available.

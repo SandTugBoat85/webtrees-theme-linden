@@ -142,10 +142,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
      */
     public function headContent(): string
     {
-        // Every enabled global module adds to the <head>, whichever theme the page uses
-        $container = Registry::container();
-
-        if (!$container->has(ModuleThemeInterface::class) || $container->get(ModuleThemeInterface::class)->name() !== $this->name()) {
+        if (!$this->inUse()) {
             return '';
         }
 
@@ -194,6 +191,23 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
         }
 
         return '<style>' . $css . '</style>' . $head;
+    }
+
+    /**
+     * "Theme: Linden" in the footer, unless the settings turn it off. It is added here rather than
+     * as a footer module, because unticking a footer module in the control panel disables the
+     * whole module, theme and all. The layout puts this after the footer, so a line of script
+     * moves it into the footer band; without script it stays just below.
+     */
+    public function bodyContent(): string
+    {
+        if (!$this->inUse() || $this->getPreference('footer-credit', '1') !== '1') {
+            return '';
+        }
+
+        return '<div class="wt-footer linden-credit">' . I18N::translate('Theme') . ': ' .
+            '<a href="' . e($this->customModuleSupportUrl()) . '">Linden</a></div>' .
+            '<script>document.querySelector(".wt-footers")?.append(document.querySelector(".linden-credit"))</script>';
     }
 
     /**
@@ -253,6 +267,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
             'banner'          => $this->banner(),
             'banner_title'    => $this->getPreference('banner-title') === '1',
             'chart_ages'      => $this->getPreference('chart-ages') === '1',
+            'footer_credit'   => $this->getPreference('footer-credit', '1') === '1',
             'icon'            => $this->hasIcon() ? $this->iconUrl(192) : null,
             'app_name'        => $this->getPreference('app-name'),
             'app_short_name'  => $this->getPreference('app-short-name'),
@@ -276,6 +291,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
 
         $this->setPreference('banner-title', $params->boolean('banner-title', false) ? '1' : '0');
         $this->setPreference('chart-ages', $params->boolean('chart-ages', false) ? '1' : '0');
+        $this->setPreference('footer-credit', $params->boolean('footer-credit', false) ? '1' : '0');
         $this->setPreference('theme-menu', $params->boolean('theme-menu', false) ? '1' : '0');
 
         try {
@@ -310,6 +326,17 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
         FlashMessages::addMessage($message, 'success');
 
         return redirect($this->getConfigLink());
+    }
+
+    /**
+     * Whether this is the theme of the current page. Every enabled global module adds to the page,
+     * whichever theme it uses.
+     */
+    private function inUse(): bool
+    {
+        $container = Registry::container();
+
+        return $container->has(ModuleThemeInterface::class) && $container->get(ModuleThemeInterface::class)->name() === $this->name();
     }
 
     private function accent(): string
