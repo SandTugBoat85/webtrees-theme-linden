@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Print styles: pages print in black on white without buttons, tabs, filters or paging; the
+  individual page prints in one column, and charts print sideways, scaled to fit.
+- On phones the banner stops shrinking at 96 pixels high and is cropped instead, so lettering
+  stays readable. A new setting chooses which part stays in view (left to right).
 - SECURITY.md: how to report a security problem privately.
 
 ## 1.2.0 (2026-11-01)

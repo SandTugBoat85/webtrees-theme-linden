@@ -17,6 +17,7 @@ touching any code: upload a banner and an icon, pick a colour, and you're done.
 - **Compact chart boxes**: name, birth and death on one line each, a small round photo, and a
   coloured edge for men and women. Long places are trimmed rather than wrapping.
 - **A one-row footer**, and blocks that stack neatly on a phone.
+- **Clean printouts**: no buttons, tabs or filters; individual pages in one column; charts sideways.
 - **Source Sans 3**, served from your own site (no calls to Google Fonts).
 - Optionally keep the theme menu for administrators, so everyone else always sees Linden.
 
@@ -58,7 +59,8 @@ Go to **Control panel > Modules > Themes** and click the preferences icon next t
   charcoal, navy, burgundy, teal, rust) or any colour you like.
 - **Banner**: any JPEG, PNG, GIF or WebP, ideally about 1200 × 180 pixels. It is scaled to fill
   the width of the page, so keep any lettering in it large: on a phone it shrinks with the image.
-  For a picture without lettering, tick **Show the site title over the banner**.
+  For a picture without lettering, tick **Show the site title over the banner**. On a phone the
+  banner is cropped rather than shrunk too small; **Keep in view on phones** picks which part stays.
 
   ![The site title over a banner picture](docs/title-over-banner.png)
 

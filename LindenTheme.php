@@ -70,6 +70,9 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
     // PHP's memory_limit is often 128MB
     private const MAX_PIXELS = 16_000_000;
 
+    // Which part of the banner stays in view when a phone crops it: the setting and its position
+    public const BANNER_FOCUS = ['0' => 'Left', '25' => 'Left of centre', '50' => 'Centre', '75' => 'Right of centre', '100' => 'Right'];
+
     // Longest home-screen name, short name and description
     private const MAX_LENGTHS = ['app-name' => 100, 'app-short-name' => 30, 'app-description' => 200];
 
@@ -186,7 +189,8 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
         $banner = $this->banner();
 
         if ($banner !== null) {
-            $css .= ':root{--linden-banner:' . self::cssUrl($banner['url']) . ";--linden-banner-ratio:{$banner['width']} / {$banner['height']}}\n";
+            $css .= ':root{--linden-banner:' . self::cssUrl($banner['url']) . ";--linden-banner-ratio:{$banner['width']} / {$banner['height']};" .
+                '--linden-banner-focus:' . $this->bannerFocus() . "%}\n";
         }
 
         // The layout has already listed webtrees' icons; browsers use the last icon given
@@ -276,6 +280,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
             'accent'          => $this->accent(),
             'banner'          => $this->banner(),
             'banner_title'    => $this->getPreference('banner-title') === '1',
+            'banner_focus'    => $this->bannerFocus(),
             'chart_ages'      => $this->getPreference('chart-ages') === '1',
             'footer_credit'   => $this->getPreference('footer-credit', '1') === '1',
             'icon'            => $this->hasIcon() ? $this->iconUrl(192) : null,
@@ -300,6 +305,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
         }
 
         $this->setPreference('banner-title', $params->boolean('banner-title', false) ? '1' : '0');
+        $this->setPreference('banner-focus', $params->isInArray(array_map(strval(...), array_keys(self::BANNER_FOCUS)))->string('banner-focus', '50'));
         $this->setPreference('chart-ages', $params->boolean('chart-ages', false) ? '1' : '0');
         $this->setPreference('footer-credit', $params->boolean('footer-credit', false) ? '1' : '0');
         $this->setPreference('theme-menu', $params->boolean('theme-menu', false) ? '1' : '0');
@@ -373,6 +379,13 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
         [$width, $height, $version] = array_map(intval(...), $parts);
 
         return ['url' => $this->imageUrl('banner.jpg', $version), 'width' => $width, 'height' => $height];
+    }
+
+    private function bannerFocus(): string
+    {
+        $focus = $this->getPreference('banner-focus', '50');
+
+        return array_key_exists($focus, self::BANNER_FOCUS) ? $focus : '50';
     }
 
     private function hasIcon(): bool

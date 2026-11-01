@@ -21,6 +21,9 @@
     /* Header, menu, content and footer width: 1200px, or Bootstrap's 1320px on wide screens */
     --linden-page-width: 1200px;
 
+    /* The shortest the banner gets on a phone before it is cropped rather than shrunk */
+    --linden-banner-min: 6rem;
+
     --bs-body-font-family: 'Source Sans 3', 'Source Sans Pro', -apple-system, 'Segoe UI', Roboto, sans-serif;
     --bs-body-font-size: 1.0625rem;
     --bs-body-line-height: 1.6;
@@ -108,14 +111,16 @@ body.wt-global {
 
 /* The banner image from the theme's settings. Without one, the site title shows instead;
    with one, the theme adds banner.css (banner in place of the title) or banner-title.css
-   (the title over the banner). */
+   (the title over the banner). On a phone the banner stops shrinking at --linden-banner-min
+   and is cropped instead, keeping the part at --linden-banner-focus (from the settings). */
 [dir] .wt-site-logo {
     display: none;
     order: 1;
     flex: 0 0 100%;
     aspect-ratio: var(--linden-banner-ratio);
+    min-height: var(--linden-banner-min);
     padding: 0;
-    background: var(--linden-banner) center / cover no-repeat;
+    background: var(--linden-banner) var(--linden-banner-focus, 50%) center / cover no-repeat;
 }
 
 [dir] .wt-site-title {
@@ -547,5 +552,106 @@ body.wt-global {
     [dir] .wt-footers > .wt-footer,
     [dir] .wt-footers > .wt-footer:last-child {
         text-align: center !important;
+    }
+}
+
+/* ---------- Printing ----------
+   webtrees already leaves out the header, menu, footer and chart options. Linden also drops
+   the controls that do nothing on paper, prints in black at a reading size, puts the
+   individual page in one column, and turns chart pages sideways, scaled to fit. */
+
+@page {
+    margin: 1.5cm;
+}
+
+@page chart {
+    size: landscape;
+}
+
+@media print {
+    :root {
+        --linden-page-width: none;
+    }
+
+    body.wt-global {
+        font-size: 10.5pt;
+        line-height: 1.4;
+        color: #000000;
+    }
+
+    .wt-global a {
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+
+    [dir] .wt-main-container {
+        padding: 0;
+    }
+
+    .wt-global h1,
+    .wt-global h2,
+    .wt-global h3 {
+        break-after: avoid;
+    }
+
+    [dir] .wt-page-title {
+        font-size: 18pt;
+        margin-bottom: 0.75rem;
+    }
+
+    /* Buttons, tabs, list filters and paging, sort arrows, chart arrows, the "events of close
+       relatives" switch, placeholder silhouettes, and closed sidebar sections */
+    .wt-global .btn,
+    .wt-global .nav-tabs,
+    .wt-global .form-check,
+    .wt-global .dt-search,
+    .wt-global .dt-length,
+    .wt-global .dt-info,
+    .wt-global .dt-paging,
+    .wt-global .dt-column-order,
+    .wt-global table.dataTable tfoot,
+    .wt-global table.dataTable thead tr:has(.btn),
+    .wt-global .wt-chart-box-extra,
+    .wt-global .wt-chart :is(.wt-icon-arrow-left, .wt-icon-arrow-right),
+    .wt-global .wt-tab-facts label:has(#show-relatives-facts),
+    .wt-global .img-thumbnail:has(.wt-individual-silhouette),
+    .wt-global .wt-chart-box-thumbnail .icon-silhouette,
+    .wt-global .wt-sidebar .accordion-item:has(.accordion-button.collapsed) {
+        display: none !important;
+    }
+
+    .wt-global .dropdown-toggle::after,
+    .wt-global .accordion-button::after {
+        display: none !important;
+    }
+
+    .wt-global tr,
+    .wt-global .wt-chart-box,
+    .wt-global .card {
+        break-inside: avoid;
+    }
+
+    .wt-global .wt-chart-box,
+    .wt-global .card {
+        box-shadow: none !important;
+    }
+
+    /* Individual page: the facts and the family navigator one after the other, full width */
+    .wt-route-IndividualPage .wt-main-container .row > [class*="col"] {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    /* Chart pages: sideways, and scaled so four generations fit across */
+    :is(.wt-route-AncestorsChartModule, .wt-route-CompactTreeChartModule, .wt-route-DescendancyChartModule,
+        .wt-route-FamilyBookChartModule, .wt-route-FanChartModule, .wt-route-HourglassChartModule,
+        .wt-route-LifespansChartModule, .wt-route-PedigreeChartModule, .wt-route-PedigreeMapModule,
+        .wt-route-RelationshipsChartModule, .wt-route-TimelineChartModule, .wt-route-webtrees-descendants-chart,
+        .wt-route-webtrees-fan-chart, .wt-route-webtrees-pedigree-chart) .wt-main-wrapper {
+        page: chart;
+    }
+
+    .wt-global .wt-chart {
+        zoom: 0.8;
     }
 }

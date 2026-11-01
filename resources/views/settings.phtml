@@ -13,6 +13,7 @@ use Linden\WebtreesTheme\LindenTheme;
  * @var string                                            $app_name
  * @var string                                            $app_short_name
  * @var array{url:string,width:int,height:int}|null       $banner
+ * @var string                                            $banner_focus
  * @var bool                                              $banner_title
  * @var bool                                              $chart_ages
  * @var bool                                              $footer_credit
@@ -63,6 +64,13 @@ use Linden\WebtreesTheme\LindenTheme;
                 <label for="banner-title" class="form-check-label">Show the site title over the banner</label>
             </div>
             <p class="text-muted">For a picture without lettering: the title goes on the left over a fade of the accent colour, in white or dark to suit it. Otherwise the banner replaces the title, which stays available to screen readers.</p>
+            <label for="banner-focus" class="form-label">Keep in view on phones</label>
+            <select id="banner-focus" name="banner-focus" class="form-select w-auto">
+                <?php foreach (LindenTheme::BANNER_FOCUS as $value => $label) : ?>
+                    <option value="<?= e((string) $value) ?>" <?= (string) $value === $banner_focus ? 'selected' : '' ?>><?= e($label) ?></option>
+                <?php endforeach ?>
+            </select>
+            <p class="text-muted">On a narrow screen the banner stops shrinking before it gets too small to see, and its sides are cropped instead. Choose the part to keep.</p>
         </div>
     </div>
 
