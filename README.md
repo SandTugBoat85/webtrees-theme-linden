@@ -17,7 +17,7 @@ touching any code: upload a banner and an icon, pick a colour, and you're done.
   coloured edge for men and women. Long places are trimmed rather than wrapping.
 - **A one-row footer**, and blocks that stack neatly on a phone.
 - **Source Sans 3**, served from your own site (no calls to Google Fonts).
-- Visitors always see Linden; only administrators get the theme menu.
+- Optionally keep the theme menu for administrators, so everyone else always sees Linden.
 
 | Out of the box | Charts |
 | --- | --- |
@@ -52,6 +52,7 @@ Go to **Control panel > Modules > Themes** and click the preferences icon next t
 - **Banner**: any JPEG, PNG, GIF or WebP, ideally about 1200 × 180 pixels. It is scaled to fill
   the width of the page, so keep any lettering in it large: on a phone it shrinks with the image.
 - **Icon**: a square image, ideally 512 × 512 pixels. Other shapes are cropped to the middle.
+- **Theme menu**: untick "Let everyone choose a theme" to keep the menu for administrators.
 - **Home screen**: the name, short name and description used when someone adds your site to
   their phone's home screen. Left blank, webtrees' own are used.
 

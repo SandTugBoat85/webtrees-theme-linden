@@ -105,11 +105,11 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
     }
 
     /**
-     * Visitors always get this theme; only administrators see the theme switcher.
+     * The theme menu, unless the settings keep it for administrators.
      */
     public function menuThemes(): Menu|null
     {
-        return Auth::isAdmin() ? parent::menuThemes() : null;
+        return $this->getPreference('theme-menu', '1') === '1' || Auth::isAdmin() ? parent::menuThemes() : null;
     }
 
     public function stylesheets(): array
@@ -238,6 +238,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
             'app_name'        => $this->getPreference('app-name'),
             'app_short_name'  => $this->getPreference('app-short-name'),
             'app_description' => $this->getPreference('app-description'),
+            'theme_menu'      => $this->getPreference('theme-menu', '1') === '1',
         ]);
     }
 
@@ -253,6 +254,8 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
         foreach (self::MAX_LENGTHS as $name => $length) {
             $this->setPreference($name, mb_substr(trim($params->string($name)), 0, $length));
         }
+
+        $this->setPreference('theme-menu', $params->boolean('theme-menu', false) ? '1' : '0');
 
         try {
             if ($params->boolean('remove-banner', false)) {

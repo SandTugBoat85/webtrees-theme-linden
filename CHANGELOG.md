@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- New setting: let everyone choose a theme, or keep the theme menu for administrators.
+  Everyone gets the menu unless you untick it (1.0 always kept it for administrators).
+
 ## 1.0.1 (2026-11-01)
 
 - A second copy of the theme folder (for example an old one kept during an upgrade) no longer

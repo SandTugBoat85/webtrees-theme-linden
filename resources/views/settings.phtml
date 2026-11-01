@@ -13,6 +13,7 @@ use Fisharebest\Webtrees\I18N;
  * @var string                                            $app_short_name
  * @var array{url:string,width:int,height:int}|null       $banner
  * @var string|null                                       $icon
+ * @var bool                                              $theme_menu
  * @var string                                            $title
  */
 
@@ -60,6 +61,17 @@ use Fisharebest\Webtrees\I18N;
             <?php endif ?>
             <input type="file" id="icon" name="icon" class="form-control" accept="image/jpeg,image/png,image/gif,image/webp">
             <p class="text-muted">The browser tab and home-screen icon. A square PNG of 512 × 512 pixels works best; other shapes are cropped to the middle square.</p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-sm-3 col-form-label">Theme menu</div>
+        <div class="col-sm-9">
+            <div class="form-check">
+                <input type="checkbox" id="theme-menu" name="theme-menu" value="1" class="form-check-input" <?= $theme_menu ? 'checked' : '' ?>>
+                <label for="theme-menu" class="form-check-label">Let everyone choose a theme</label>
+            </div>
+            <p class="text-muted">When this is off, only administrators see the theme menu and everyone else sees Linden. The menu only appears when more than one theme is enabled.</p>
         </div>
     </div>
 
