@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.0 (2026-11-01)
 
 - The control panel tells you when a new version of Linden is available.
 
