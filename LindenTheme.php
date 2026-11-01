@@ -56,8 +56,12 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
     private const ICON_SIZES       = [32, 180, 192, 512];
     private const ICON_MIN_SIZE    = 192;
 
-    // Refuse images that would take too much memory to decode (a 40 megapixel image needs ~160MB)
-    private const MAX_PIXELS = 40_000_000;
+    // Refuse images that would take too much memory to decode: GD needs 4 bytes a pixel, and
+    // PHP's memory_limit is often 128MB
+    private const MAX_PIXELS = 16_000_000;
+
+    // Longest home-screen name, short name and description
+    private const MAX_LENGTHS = ['app-name' => 100, 'app-short-name' => 30, 'app-description' => 200];
 
     public function title(): string
     {
@@ -76,7 +80,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
 
     public function customModuleVersion(): string
     {
-        return '1.0.0';
+        return '1.0.1';
     }
 
     public function customModuleSupportUrl(): string
@@ -132,7 +136,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
             foreach (self::FONT_RANGES as $subset => $range) {
                 $url = $this->assetUrl('fonts/source-sans-3-' . $style . '-' . $subset . '.woff2');
                 $css .= "@font-face{font-family:'Source Sans 3';font-style:{$style};font-weight:200 900;font-display:swap;" .
-                    "src:url('{$url}') format('woff2');unicode-range:{$range}}\n";
+                    'src:' . self::cssUrl($url) . " format('woff2');unicode-range:{$range}}\n";
             }
         }
 
@@ -156,7 +160,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
         $banner = $this->banner();
 
         if ($banner !== null) {
-            $css .= ":root{--linden-banner:url('{$banner['url']}');--linden-banner-ratio:{$banner['width']} / {$banner['height']}}\n" .
+            $css .= ':root{--linden-banner:' . self::cssUrl($banner['url']) . ";--linden-banner-ratio:{$banner['width']} / {$banner['height']}}\n" .
                 '[dir] .wt-site-logo{display:block}' .
                 '[dir] .wt-site-title{position:absolute!important;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}' . "\n";
         }
@@ -246,9 +250,9 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
             $this->setPreference('accent', $accent);
         }
 
-        $this->setPreference('app-name', trim($params->string('app-name')));
-        $this->setPreference('app-short-name', trim($params->string('app-short-name')));
-        $this->setPreference('app-description', trim($params->string('app-description')));
+        foreach (self::MAX_LENGTHS as $name => $length) {
+            $this->setPreference($name, mb_substr(trim($params->string($name)), 0, $length));
+        }
 
         try {
             if ($params->boolean('remove-banner', false)) {
@@ -374,7 +378,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
         }
 
         if ($info[0] * $info[1] > self::MAX_PIXELS) {
-            throw new InvalidArgumentException('That image has too many pixels. Make it smaller and try again.');
+            throw new InvalidArgumentException('That image is too big to process (over 16 megapixels). Make it smaller and try again.');
         }
 
         $image = @imagecreatefromstring($data);
@@ -448,6 +452,16 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
                 $data->delete(self::DATA_FOLDER . $file);
             }
         }
+    }
+
+    /**
+     * A url() for the <style> block. The URLs come from webtrees' routes, but where webtrees
+     * has no base_url configured they include the request's Host header, so keep them from
+     * closing the quotes or the block.
+     */
+    private static function cssUrl(string $url): string
+    {
+        return "url('" . strtr($url, ["'" => '%27', '\\' => '%5C', '<' => '%3C', '>' => '%3E', "\n" => '', "\r" => '']) . "')";
     }
 
     /**

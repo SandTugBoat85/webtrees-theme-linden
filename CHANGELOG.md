@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.1 (2026-11-01)
+
+- A second copy of the theme folder (for example an old one kept during an upgrade) no longer
+  stops every page with a fatal error
+- Images over 16 megapixels are refused with a clear message, rather than possibly running
+  out of memory
+- Home-screen name, short name and description are limited to 100, 30 and 200 characters
+- Hardening: image addresses in the page's styles are escaped
+
 ## 1.0.0 (2026-11-01)
 
 First release.

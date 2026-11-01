@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Fisharebest\Webtrees\Module\ModuleThemeInterface;
 use Fisharebest\Webtrees\Registry;
 use Fisharebest\Webtrees\Services\ModuleService;
 use Fisharebest\Webtrees\Validator;
@@ -10,8 +11,15 @@ use Psr\Http\Message\ServerRequestInterface;
 
 // Replaces webtrees' manifest, so "Add to home screen" uses the name and icon from the theme's settings
 
-$theme    = Registry::container()->get(ModuleService::class)->findByInterface(LindenTheme::class)->first();
-$base_url = Validator::attributes(Registry::container()->get(ServerRequestInterface::class))->string('base_url');
+// The copy of Linden in use, or the first one found when another theme is in use
+$container = Registry::container();
+$theme     = $container->has(ModuleThemeInterface::class) ? $container->get(ModuleThemeInterface::class) : null;
+
+if (!$theme instanceof LindenTheme) {
+    $theme = $container->get(ModuleService::class)->findByInterface(LindenTheme::class)->first();
+}
+
+$base_url = Validator::attributes($container->get(ServerRequestInterface::class))->string('base_url');
 
 ?>
 <?= json_encode((object) $theme->manifest($base_url), JSON_THROW_ON_ERROR) ?>
