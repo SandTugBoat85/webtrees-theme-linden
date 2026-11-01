@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- SECURITY.md: how to report a security problem privately.
+
 ## 1.2.0 (2026-11-01)
 
 - Chart pages use the whole window width; everything else keeps the page width.
