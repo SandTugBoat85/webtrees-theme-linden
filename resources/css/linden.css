@@ -104,7 +104,8 @@ body.wt-global {
 }
 
 /* The banner image from the theme's settings. Without one, the site title shows instead;
-   with one, the theme hides the title (but keeps it for screen readers). */
+   with one, the theme adds banner.css (banner in place of the title) or banner-title.css
+   (the title over the banner). */
 [dir] .wt-site-logo {
     display: none;
     order: 1;

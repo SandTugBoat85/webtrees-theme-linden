@@ -12,6 +12,7 @@ use Fisharebest\Webtrees\I18N;
  * @var string                                            $app_name
  * @var string                                            $app_short_name
  * @var array{url:string,width:int,height:int}|null       $banner
+ * @var bool                                              $banner_title
  * @var string|null                                       $icon
  * @var bool                                              $theme_menu
  * @var string                                            $title
@@ -45,7 +46,12 @@ use Fisharebest\Webtrees\I18N;
                 </div>
             <?php endif ?>
             <input type="file" id="banner" name="banner" class="form-control" accept="image/jpeg,image/png,image/gif,image/webp">
-            <p class="text-muted">A wide image across the top of every page, for example 1200 × 180 pixels. It replaces the site title, which stays available to screen readers.</p>
+            <p class="text-muted">A wide image across the top of every page, for example 1200 × 180 pixels.</p>
+            <div class="form-check">
+                <input type="checkbox" id="banner-title" name="banner-title" value="1" class="form-check-input" <?= $banner_title ? 'checked' : '' ?>>
+                <label for="banner-title" class="form-check-label">Show the site title over the banner</label>
+            </div>
+            <p class="text-muted">For a picture without lettering: the title goes on the left over a fade of the accent colour, in white or dark to suit it. Otherwise the banner replaces the title, which stays available to screen readers.</p>
         </div>
     </div>
 

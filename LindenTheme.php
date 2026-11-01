@@ -114,7 +114,13 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
 
     public function stylesheets(): array
     {
-        return [...parent::stylesheets(), $this->assetUrl('css/linden.css')];
+        $stylesheets = [...parent::stylesheets(), $this->assetUrl('css/linden.css')];
+
+        if ($this->banner() !== null) {
+            $stylesheets[] = $this->assetUrl($this->getPreference('banner-title') === '1' ? 'css/banner-title.css' : 'css/banner.css');
+        }
+
+        return $stylesheets;
     }
 
     /**
@@ -160,9 +166,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
         $banner = $this->banner();
 
         if ($banner !== null) {
-            $css .= ':root{--linden-banner:' . self::cssUrl($banner['url']) . ";--linden-banner-ratio:{$banner['width']} / {$banner['height']}}\n" .
-                '[dir] .wt-site-logo{display:block}' .
-                '[dir] .wt-site-title{position:absolute!important;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}' . "\n";
+            $css .= ':root{--linden-banner:' . self::cssUrl($banner['url']) . ";--linden-banner-ratio:{$banner['width']} / {$banner['height']}}\n";
         }
 
         // The layout has already listed webtrees' icons; browsers use the last icon given
@@ -234,6 +238,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
             'title'           => $this->title(),
             'accent'          => $this->accent(),
             'banner'          => $this->banner(),
+            'banner_title'    => $this->getPreference('banner-title') === '1',
             'icon'            => $this->hasIcon() ? $this->iconUrl(192) : null,
             'app_name'        => $this->getPreference('app-name'),
             'app_short_name'  => $this->getPreference('app-short-name'),
@@ -255,6 +260,7 @@ class LindenTheme extends MinimalTheme implements ModuleConfigInterface, ModuleC
             $this->setPreference($name, mb_substr(trim($params->string($name)), 0, $length));
         }
 
+        $this->setPreference('banner-title', $params->boolean('banner-title', false) ? '1' : '0');
         $this->setPreference('theme-menu', $params->boolean('theme-menu', false) ? '1' : '0');
 
         try {

@@ -1,0 +1,16 @@
+/*
+ * Linden, with the site title over the banner: the title itself carries the banner, with a
+ * fade of the accent colour behind the lettering so it reads on any picture.
+ */
+
+[dir] .wt-site-title {
+    display: flex;
+    align-items: center;
+    aspect-ratio: var(--linden-banner-ratio);
+    min-height: 4.5rem;
+    padding: 0 1.5rem;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    color: var(--linden-on-accent);
+    text-shadow: 0 1px 3px rgba(var(--linden-accent-rgb), 0.8);
+    background: linear-gradient(90deg, rgba(var(--linden-accent-rgb), 0.85), rgba(var(--linden-accent-rgb), 0) 60%), var(--linden-banner) center / cover no-repeat;
+}

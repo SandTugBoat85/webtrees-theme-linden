@@ -7,7 +7,8 @@ touching any code: upload a banner and an icon, pick a colour, and you're done.
 
 ## Features
 
-- **Your banner** across the top of every page. Without one, the site title shows instead.
+- **Your banner** across the top of every page, with or without the site title over it.
+  Without one, the site title shows on its own.
 - **Your colour** for the menu bar, footer, buttons and links. Text on it turns white or dark
   to suit, and links are darkened if need be so they stay readable on white.
 - **Your icon** in browser tabs and on phone home screens. Upload one image and Linden makes
@@ -51,6 +52,10 @@ Go to **Control panel > Modules > Themes** and click the preferences icon next t
 - **Accent colour**: the menu bar, footer, buttons and links.
 - **Banner**: any JPEG, PNG, GIF or WebP, ideally about 1200 × 180 pixels. It is scaled to fill
   the width of the page, so keep any lettering in it large: on a phone it shrinks with the image.
+  For a picture without lettering, tick **Show the site title over the banner**.
+
+  ![The site title over a banner picture](docs/title-over-banner.png)
+
 - **Icon**: a square image, ideally 512 × 512 pixels. Other shapes are cropped to the middle.
 - **Theme menu**: untick "Let everyone choose a theme" to keep the menu for administrators.
 - **Home screen**: the name, short name and description used when someone adds your site to

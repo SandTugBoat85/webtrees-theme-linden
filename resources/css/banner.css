@@ -1,0 +1,18 @@
+/*
+ * Linden, with a banner and no title over it: the banner shows in place of the site title,
+ * which is kept for screen readers.
+ */
+
+[dir] .wt-site-logo {
+    display: block;
+}
+
+[dir] .wt-site-title {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
