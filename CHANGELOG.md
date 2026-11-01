@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.2.0 (2026-11-01)
 
 - Chart pages use the whole window width; everything else keeps the page width.
 - Six preset accent colours on the settings page, next to the colour picker.
