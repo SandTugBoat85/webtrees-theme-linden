@@ -26,6 +26,10 @@ touching any code: upload a banner and an icon, pick a colour, and you're done.
 | **Individual page** | **On a phone** |
 | ![An individual's page with facts and family navigator](docs/individual.png) | ![The home page on a phone](docs/phone.png) |
 
+Charts use the whole window width, while the banner, menu and everything else keep the page width:
+
+![The interactive tree spanning a wide window](docs/wide-chart.png)
+
 ## Requirements
 
 - webtrees 2.2 (tested with 2.2.6)
@@ -61,6 +65,9 @@ Go to **Control panel > Modules > Themes** and click the preferences icon next t
 - **Icon**: a square image, ideally 512 × 512 pixels. Other shapes are cropped to the middle.
 - **Chart boxes**: tick "Show parents' ages at each birth" to show them in charts too.
 - **Footer**: "Theme: Linden" appears in the footer, linking here. Untick it if you'd rather not.
+
+  ![The footer, with "Theme: Linden" on the right](docs/footer.png)
+
 - **Theme menu**: untick "Let everyone choose a theme" to keep the menu for administrators.
 - **Home screen**: the name, short name and description used when someone adds your site to
   their phone's home screen. Left blank, webtrees' own are used.
